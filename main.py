@@ -55,4 +55,4 @@ async def webhook(request: Request):
 # Эндпоинт для проверки статуса
 @app.get("/health")
 def health():
-    return {"status": "running", "version": "1.0"}
+    return {"status": "running", "version": "1.01"}
