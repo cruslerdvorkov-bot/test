@@ -33,6 +33,21 @@ async def handle_webhook(request: Request):
             content={"error": "Internal server error"}
         )
 
+@app.get("/webhook")
+async def handle_webhook_get(request: Request):
+    try:
+        return JSONResponse(
+            status_code=200,
+            content={"result": "get query"}
+        )
+    except Exception as e:
+        print("Ошибка:", e)
+        return JSONResponse(
+            status_code=500,
+            content={"error": "Internal server error"}
+        )
+
+
 # Для тестового эндпоинта (не используется в продакшене)
 @app.get("/")
 def read_root():
