@@ -36,4 +36,4 @@ async def handle_webhook(request: Request):
 # Для тестового эндпоинта (не используется в продакшене)
 @app.get("/")
 def read_root():
-    return {"status": "webhook is running"}
+    return {"status": "webhook is running. version: 1.01"}
