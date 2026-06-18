@@ -46,11 +46,11 @@ async def webhook(request: Request):
         return JSONResponse({"status": "forwarded"})
 
     except Exception as e:
-        logger.error(f"Ошибка обработки вебхука: {str(e)}")
-        return JSONResponse(
-            status_code=500,
-            content={"error": "Internal server error"}
-        )
+    logger.error(f"Ошибка обработки вебхука: {str(e)}", exc_info=True)
+    return JSONResponse(
+        status_code=500,
+        content={"error": f"Internal server error: {str(e)}"}
+    )
 
 # Эндпоинт для проверки статуса
 @app.get("/health")
