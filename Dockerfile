@@ -8,8 +8,8 @@ COPY default.conf /etc/nginx/conf.d/default.conf
 RUN mkdir -p /etc/ssl
 
 # Копируем сертификаты с проверкой формата
-COPY cert.pem /etc/ssl/mycert.pem
-COPY key.pem /etc/ssl/mykey.pem
+COPY public.key /etc/ssl/public.key
+COPY private.key /etc/ssl/private.key
 
 # Проверяем, что файлы не пустые
 RUN [ -s /etc/ssl/mycert.pem ] || { echo "❌ Ошибка: Файл cert.pem пустой или не существует!"; exit 1; }
