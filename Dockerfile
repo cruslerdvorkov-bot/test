@@ -12,9 +12,6 @@ RUN apt-get update && \
 # Копируем конфигурацию Nginx
 COPY nginx.conf /etc/nginx/nginx.conf
 
-# Копируем приложение (если есть)
-COPY ./app /app
-
 # Запускаем Nginx
 EXPOSE 80 443
 CMD ["nginx", "-g", "daemon off;"]
