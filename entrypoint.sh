@@ -1,5 +1,5 @@
 !/bin/sh
-
+ 
 # Останавливаем Nginx, если уже работает (на всякий случай)
 nginx -s stop 2>/dev/null || true
 
