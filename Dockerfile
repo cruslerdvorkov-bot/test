@@ -2,7 +2,7 @@
 FROM nginx:alpine
 
 # Копируем конфигурацию NGINX
-COPY nginx/nginx.conf /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/nginx.conf
 
 # Копируем SSL-сертификаты (Render предоставит их автоматически)
 RUN mkdir -p /etc/nginx/ssl && \
