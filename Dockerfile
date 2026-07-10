@@ -1,17 +1,8 @@
-# Используем официальный образ NGINX с поддержкой Lua
-FROM nginx:latest
+# OpenResty bundles nginx + LuaJIT + ngx_http_lua (required by access_by_lua_block)
+FROM openresty/openresty:alpine
 
-# Устанавливаем зависимости для Lua и NGINX
-RUN apt-get update && \
-    apt-get install -y nginx-extras luarocks && \
-    luarocks install lua-nginx-module
+# Install lua-resty-http (provides the `resty.http` module used in nginx.conf)
+RUN opm get ledgetech/lua-resty-http
 
-# Копируем конфигурацию NGINX
+# Copy our nginx configuration
 COPY nginx.conf /etc/nginx/nginx.conf
-
-# Удаляем стандартный конфиг (если не нужен)
-RUN rm /etc/nginx/conf.d/default.conf
-
-# Очистка кэша (опционально, но рекомендуется)
-RUN apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
