@@ -1,8 +1,20 @@
-# Используем OpenResty (включает NGINX + Lua + lua-nginx-module)
-FROM openresty/openresty:latest
+FROM nginx:latest
 
-# Копируем конфигурацию NGINX
-COPY nginx.conf /usr/local/openresty/nginx/conf/nginx.conf
+# Устанавливаем зависимости для установки luarocks и lua-nginx-module
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        build-essential \
+        libpcre3-dev \
+        zlib1g-dev \
+        luarocks && \
+    luarocks install lua-nginx-module
 
-# Очистка кэша (опционально, уменьшает размер образа)
-RUN rm -rf /var/lib/apt/lists/*
+# Копируем конфигурацию Nginx
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Копируем приложение (если есть)
+COPY ./app /app
+
+# Запускаем Nginx
+EXPOSE 80 443
+CMD ["nginx", "-g", "daemon off;"]
