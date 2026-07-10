@@ -12,11 +12,11 @@ COPY public.key /etc/ssl/public.key
 COPY private.key /etc/ssl/private.key
 
 # Проверяем, что файлы не пустые
-RUN [ -s /etc/ssl/mycert.pem ] || { echo "❌ Ошибка: Файл cert.pem пустой или не существует!"; exit 1; }
-RUN [ -s /etc/ssl/mykey.pem ] || { echo "❌ Ошибка: Файл key.pem пустой или не существует!"; exit 1; }
+RUN [ -s /etc/ssl/public.key ] || { echo "❌ Ошибка: Файл public.key пустой или не существует!"; exit 1; }
+RUN [ -s /etc/ssl/private.key ] || { echo "❌ Ошибка: Файл private.key пустой или не существует!"; exit 1; }
 
 # Устанавливаем права на приватный ключ
-RUN chmod 600 /etc/ssl/mykey.pem
+RUN chmod 600 /etc/ssl/private.key
 
 # Запускаем Nginx
 EXPOSE 80
